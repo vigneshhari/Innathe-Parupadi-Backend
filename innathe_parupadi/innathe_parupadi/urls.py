@@ -22,7 +22,9 @@ from Article import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('news/',include("Article.urls")),
-        path('summernote/', include('django_summernote.urls')),
+    path('summernote/', include('django_summernote.urls')),
+    path('upload/', include('fileupload.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

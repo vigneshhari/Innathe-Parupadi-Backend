@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.db.models import Max
+import datetime
 from django.http import JsonResponse
 from .models import Article
 
@@ -15,3 +16,9 @@ def list(request):
     for i in data:
         lis.append({"title" : i.title , "picurl" : i.headpic.url , "author" : i.author,"newsid" : i.newsid})
     return JsonResponse({"data" : lis})
+
+def add(request):
+    val = Article.objects.all().aggregate(Max("newsid"))
+    Article(newsid = val["newsid__max"] + 1  , title = request.POST.get("title") , author = request.POST.get("author") , headpic = request.FILES["headpic"] , content = request.POST.get("content") , pubdate = datetime.datetime.now()).save()
+    for i in request.POST.keys():
+        print(i , " " ,request.POST[i])
