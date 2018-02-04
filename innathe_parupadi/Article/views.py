@@ -34,3 +34,5 @@ def login(request):
     if(User.objects.all().filter(name = request.POST.get("name") , passhash = request.POST.get("password")).__len__() == 1 ):
         request.session["loggedin"] = 1
         return HttpResponseRedirect("/upload/new/")
+    else:
+        return HttpResponseRedirect("/")
