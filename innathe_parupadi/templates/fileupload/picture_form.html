@@ -18,11 +18,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
 <meta charset="utf-8">
-<title>jQuery File Upload Demo - AngularJS version</title>
+<title>Innathe Parupadi Editor</title>
 <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for AngularJS. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap styles -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <!-- Generic page styles -->
 <link rel="stylesheet" href="/static/css/style.css">
 <!-- blueimp Gallery styles -->
@@ -42,16 +42,11 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="https://github.com/sigurdga/django-jquery-file-upload">Innathe Parupadi</a>
+
+            <h1  >Innathe Parupadi</h1>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Add News</a></li>
                 
             </ul>
         </div>
@@ -61,7 +56,7 @@
 
     <br>
     <blockquote>
-        <p>Upload Images And Videos With this tool and Drag them into the editor to load Them.</p>
+        <p>This webpage can be used to add content to The App</p>
     </blockquote>
     <br>
     <!-- The file upload form used as target for the file upload widget -->
@@ -69,7 +64,7 @@
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row fileupload-buttonbar">
+        <div class="row fileupload-buttonbar" style="margin-bottom : 20px ">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
@@ -138,7 +133,8 @@
         </table>
         {% endverbatim %}
     </form>
-    <form action="/news/add/" enctype="multipart/form-data" action="" method="post" id="article_form" >{% csrf_token %}
+    <h2 style="padding-top: 50px" >Enter Article Detials</h2>
+    <form action="/news/add/" enctype="multipart/form-data" action="" method="post" id="article_form" style="padding-top: 2px" >{% csrf_token %}
         <div>
         
         
@@ -158,7 +154,7 @@
                             
                                 <label class="required" for="id_title">Title:</label>
                                 
-                                    <input type="text" name="title" placeholder="Enter Title Here" class="vTextField" required maxlength="9000" id="id_title" />
+                                    <input style="margin-top: 20px" type="text" name="title" placeholder="Enter Title Here" class="vTextField" required maxlength="9000" id="id_title" />
                                 
                             
                             
@@ -174,7 +170,7 @@
                             
                                 <label class="required" for="id_author">Author:</label>
                                 
-                                    <input type="text" name="author" value="Someone" class="vTextField" required maxlength="1000" id="id_author" />
+                                    <input style="margin-top: 20px" type="text" name="author" placeholder="Enter Author Name Here" class="vTextField" required maxlength="1000" id="id_author" />
                                 
                             
                             
@@ -190,10 +186,10 @@
                         <div>
                             
                             
-                                <label class="required" for="id_headpic">Headpic:</label>
+                                <label style="margin-top: 20px" class="required" for="id_headpic">Header Image:</label>
                                 
                                     <p class="file-upload">
-        <input type="file" name="headpic" id="id_headpic" /></p>
+        <input  type="file" name="headpic" id="id_headpic" required /></p>
                                 
                             
                             
@@ -201,27 +197,18 @@
                     
                 </div>
             
-                <div class="form-row field-content">
-                    
-                    
-                        <div>
+
                             
-                            
-                                <label class="required" for="id_content">Content:</label>
                                 
-                                    <textarea name="content" cols="40" id="id_content" rows="10" required hidden="true">
-        Whaat !</textarea><script>
-        var settings_id_content = {"toolbar": [["style", ["style"]], ["font", ["bold", "italic", "underline", "superscript", "subscript", "strikethrough", "clear"]], ["fontname", ["fontname"]], ["fontsize", ["fontsize"]], ["color", ["color"]], ["para", ["ul", "ol", "paragraph"]], ["height", ["height"]], ["table", ["table"]], ["insert", ["link", "picture", "video", "hr"]], ["view", ["fullscreen", "codeview"]], ["help", ["help"]]], "lang": "en-US", "width": "1500px" , "url": {"upload_attachment": "/summernote/upload_attachment/"}, "height": 480};
+                                    <textarea style="margin-top: 20px" name="content" id="id_content"  required hidden="true" >
+        Replace This Text with News Content </textarea><script>
+        var settings_id_content = {"toolbar": [["style", ["style"]], ["font", ["bold", "italic", "underline", "superscript", "subscript", "strikethrough", "clear"]], ["fontname", ["fontname"]], ["fontsize", ["fontsize"]], ["color", ["color"]], ["para", ["ul", "ol", "paragraph"]], ["height", ["height"]], ["table", ["table"]], ["insert", ["link", "picture", "video", "hr"]], ["view", ["fullscreen", "codeview"]], ["help", ["help"]]], "lang": "en-US", "width": "1500px" , "url": {"upload_attachment": "/summernote/upload_attachment/"}, "height": "480px"};
         </script>
-        <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0"  required width="720" height="480"></iframe>
+        <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0"  width="100%" ></iframe>
         
                                 
                             
-                            
-                        </div>
-                    
-                </div>
-            
+     
         </fieldset>
         
         
@@ -237,7 +224,7 @@
         
         
         <div class="submit-row">
-        <input type="submit" value="Save" class="default" name="_save" />
+        <input style="margin-top: 20px" class="btn btn-primary start" type="submit" value="Save" class="default" name="_save" />
         
             
         
@@ -270,8 +257,10 @@
         </div>
         <div class="panel-body">
             <ul>
-                <li>Help/Faq</li>
-                
+                <li>To Insert Image/Video into the Editor, First Upload the Image/Video of you choice ( If it is not uploaded before ) with the tool at the top</li>
+                <li>Use the Image Icon in the editor and drag the link of the image into the textbox once the link appears press enter to insert image</li>
+                <li>Similarly to insert video use the video and drag the video file</li>
+                <li>The editor supports a various number of formatting which can be used with the various icons in the editor</li>
             </ul>
         </div>
     </div>

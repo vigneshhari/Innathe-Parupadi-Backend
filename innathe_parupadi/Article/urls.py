@@ -5,5 +5,6 @@ urlpatterns = [
     url(r'article/',views.article , name='article'),
     url(r'list/',views.list , name='list'),
     url(r'add/',views.add , name='add'),
+    url(r'login/',views.login , name='login'),
 
     ]

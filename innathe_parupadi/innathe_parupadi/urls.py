@@ -18,8 +18,10 @@ from django.urls import path , include
 from django.conf.urls.static import static
 from django.conf import settings
 from Article import urls
+import Article
 
 urlpatterns = [
+    path('' , Article.views.loginview ),
     path('admin/', admin.site.urls),
     path('news/',include("Article.urls")),
     path('summernote/', include('django_summernote.urls')),

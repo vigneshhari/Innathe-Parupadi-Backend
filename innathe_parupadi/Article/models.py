@@ -8,3 +8,7 @@ class Article(models.Model):
     pubdate = models.DateTimeField()
     headpic = models.ImageField(upload_to="")
     content = models.TextField()
+
+class User(models.Model):
+    name = models.CharField(max_length = 1000)
+    passhash = models.CharField(max_length = 1000)

@@ -12,11 +12,15 @@ class PictureCreateView(CreateView):
     model = Picture
     fields = "__all__"
 
+
+        
+
     def form_valid(self, form):
         self.object = form.save()
         files = [serialize(self.object)]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
+        test = self.request.session["user"]
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
@@ -26,18 +30,12 @@ class PictureCreateView(CreateView):
 
 class BasicVersionCreateView(PictureCreateView):
     template_name_suffix = '_basic_form'
+    def get(self,request):
+        return dfsd
 
 
-class BasicPlusVersionCreateView(PictureCreateView):
-    template_name_suffix = '_basicplus_form'
 
 
-class AngularVersionCreateView(PictureCreateView):
-    template_name_suffix = '_angular_form'
-
-
-class jQueryVersionCreateView(PictureCreateView):
-    template_name_suffix = '_jquery_form'
 
 
 class PictureDeleteView(DeleteView):
