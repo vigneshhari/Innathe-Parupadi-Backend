@@ -40,9 +40,10 @@ def add(request):
         handle_uploaded_file(request.FILES['headpic'], str(request.FILES['headpic']))
 
     return HttpResponseRedirect("/news/dash/")
-
+import os
 def handle_uploaded_file(file, filename):
-    with open('media/' + filename, 'wb+') as destination:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with open(os.path.join(BASE_DIR , "media/") + filename, 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
 
