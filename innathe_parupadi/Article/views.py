@@ -32,12 +32,19 @@ def listarticles(request):
 def add(request):
     val = request.session.get("edit",-1)
     if(val == -1):
-        request.session.get("create",-1)
-    if(request.POST.get("headpic").strip() == ""):
+        val = request.session.get("create",-1)
+    if(request.FILES.get("headpic","") == ""):
         Article.objects.filter(newsid = val).update( title = request.POST.get("title") , author = request.POST.get("author") , content = request.POST.get("content") )
     else:
         Article.objects.filter(newsid = val).update( title = request.POST.get("title") , author = request.POST.get("author") , headpic = request.FILES["headpic"] , content = request.POST.get("content") )
+        handle_uploaded_file(request.FILES['headpic'], str(request.FILES['headpic']))
+
     return HttpResponseRedirect("/news/dash/")
+
+def handle_uploaded_file(file, filename):
+    with open('media/' + filename, 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
 
 def loginview(request):
     return render(request,"login.html")
@@ -77,14 +84,17 @@ def edit(request):
 @my_login_required
 def createnew(request):
     val = Article.objects.all().aggregate(Max("newsid"))
-    Article(newsid = val , ownerid = request.session["userid"] , published = 0).save()
-    
+    Article(newsid = val["newsid__max"] + 1 , ownerid = int(request.session["userid"]) , published = 0).save()
+    request.session["edit"] = -1
+    request.session["create"] = val["newsid__max"] + 1
+    return HttpResponseRedirect("/upload/new")
+
 
 @my_login_required
 def pub(request):
     val = request.session.get("edit",-1)
     if(val == -1):
-        request.session.get("create",-1)
+        val = request.session.get("create",-1)
     if("id" not in request.GET.keys()):return HttpResponseRedirect("/")
     if(Article.objects.get(newsid = request.GET.get("id")).ownerid != request.session["userid"]):return HttpResponseRedirect("/")
     obj = Article.objects.get(newsid = val )

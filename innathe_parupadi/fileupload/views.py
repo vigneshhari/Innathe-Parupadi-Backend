@@ -40,7 +40,11 @@ class PictureCreateView(CreateView):
         if(self.request.session.get("edit",-1) == -1):
             context['editor'] = "Replace This Text with News Content"
         else:
-            Article_obj = Article.objects.get(newsid = self.request.session["edit"])
+            val = self.request.session.get("edit",-1)
+            if(val == -1):
+                val = self.request.session.get("create",-1)
+            print(val)
+            Article_obj = Article.objects.get(newsid = val)
             context['title'] = Article_obj.title
             context['author'] = Article_obj.author
             context['editor'] = Article_obj.content
@@ -53,7 +57,7 @@ class PictureCreateView(CreateView):
         test = form.cleaned_data
         val = self.request.session.get("edit",-1)
         if(val == -1):
-            self.request.session.get("create",-1)
+            val = self.request.session.get("create",-1)
         self.object = Picture(file = test["file"] , newsid = val)
         self.object.save()
         files = [serialize(self.object)]
@@ -90,7 +94,7 @@ class PictureListView(ListView):
     def render_to_response(self, context, **response_kwargs):
         val = self.request.session.get("edit",-1)
         if(val == -1):
-            self.request.session.get("create",-1)
+            val = self.request.session.get("create",-1)
         files = [ serialize(p) for p in Picture.objects.all().filter(newsid = val) ]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
