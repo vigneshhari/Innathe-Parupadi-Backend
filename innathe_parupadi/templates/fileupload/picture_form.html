@@ -1,16 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-/*
- * jQuery File Upload Plugin AngularJS Demo 1.6.2
- * https://github.com/blueimp/jQuery-File-Upload
- *
- * Copyright 2013, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
--->
+
 <html lang="en">
 <head>
 <!-- Force latest IE rendering engine or ChromeFrame if installed -->
@@ -21,15 +10,10 @@
 <title>Innathe Parupadi Editor</title>
 <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for AngularJS. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap styles -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!-- Generic page styles -->
 <link rel="stylesheet" href="/static/css/style.css">
-<!-- blueimp Gallery styles -->
 <link rel="stylesheet" href="/static/css/blueimp-gallery.min.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="/static/css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
 <noscript><link rel="stylesheet" href="/static/css/jquery.fileupload-ui-noscript.css"></noscript>
 <style>
 /* Hide Angular JS elements before initializing */
@@ -62,7 +46,6 @@
     <!-- The file upload form used as target for the file upload widget -->
     <form id="fileupload" action="." method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}"> {% csrf_token %}
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
-        <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar" style="margin-bottom : 20px ">
             <div class="col-lg-7">
@@ -154,7 +137,7 @@
                             
                                 <label class="required" for="id_title">Title:</label>
                                 
-                                    <input style="margin-top: 20px" type="text" name="title" placeholder="Enter Title Here" class="vTextField" required maxlength="9000" id="id_title" />
+                                    <input style="margin-top: 20px" type="text" name="title" value="{{title}}" placeholder="Enter Title Here" class="vTextField" required maxlength="9000" id="id_title" />
                                 
                             
                             
@@ -170,7 +153,7 @@
                             
                                 <label class="required" for="id_author">Author:</label>
                                 
-                                    <input style="margin-top: 20px" type="text" name="author" placeholder="Enter Author Name Here" class="vTextField" required maxlength="1000" id="id_author" />
+                                    <input style="margin-top: 20px" type="text" name="author" value = {{author}} placeholder="Enter Author Name Here" class="vTextField" required maxlength="1000" id="id_author" />
                                 
                             
                             
@@ -186,10 +169,10 @@
                         <div>
                             
                             
-                                <label style="margin-top: 20px" class="required" for="id_headpic">Header Image:</label>
+                                <label style="margin-top: 20px"  for="id_headpic">Header Image:</label>
                                 
                                     <p class="file-upload">
-        <input  type="file" name="headpic" id="id_headpic" required /></p>
+        <input  type="file" name="headpic" id="id_headpic"  /></p>
                                 
                             
                             
@@ -201,7 +184,7 @@
                             
                                 
                                     <textarea style="margin-top: 20px" name="content" id="id_content"  required hidden="true" >
-        Replace This Text with News Content </textarea><script>
+        {{editor}} </textarea><script>
         var settings_id_content = {"toolbar": [["style", ["style"]], ["font", ["bold", "italic", "underline", "superscript", "subscript", "strikethrough", "clear"]], ["fontname", ["fontname"]], ["fontsize", ["fontsize"]], ["color", ["color"]], ["para", ["ul", "ol", "paragraph"]], ["height", ["height"]], ["table", ["table"]], ["insert", ["link", "picture", "video", "hr"]], ["view", ["fullscreen", "codeview"]], ["help", ["help"]]], "lang": "en-US", "width": "1500px" , "url": {"upload_attachment": "/summernote/upload_attachment/"}, "height": "480px"};
         </script>
         <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0"  width="100%" ></iframe>
@@ -225,27 +208,24 @@
         
         <div class="submit-row">
         <input style="margin-top: 20px" class="btn btn-primary start" type="submit" value="Save" class="default" name="_save" />
-        
+        {% if published == 1 %}
+        <a style="margin-top: 20px" style="color:white" class="btn btn-danger " href="{{url}}">Un-Publish </a>
+        {% else %}
+        <a style="margin-top: 20px" style="color:white" class="btn btn-success " href="{{url}}" >Publish </a>
+        {% endif %}
+
             
         
             </div>
         
         
         
-            <script type="text/javascript"
-                    id="django-admin-form-add-constants"
-                    src="/static/admin/js/change_form.js"
-                    >
-            </script>
+ 
         
         
         
         
-        <script type="text/javascript"
-                id="django-admin-prepopulated-fields-constants"
-                src="/static/admin/js/prepopulate_init.js"
-                data-prepopulated-fields="[]">
-        </script>
+        
         
         
         </div>

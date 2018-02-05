@@ -9,7 +9,8 @@ class Picture(models.Model):
     problems installing pillow, use a more generic FileField instead.
 
     """
-    file = models.FileField(upload_to="pictures")
+    file = models.FileField(upload_to="Upload_Files")
+    newsid = models.IntegerField(blank=True,null=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     def __str__(self):

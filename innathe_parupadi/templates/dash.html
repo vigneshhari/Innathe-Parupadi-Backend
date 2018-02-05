@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <title> Innathe Paripadi Dashboard </title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0">
+<meta name="description" content="Innathe Paripadi News Website">
+
+
+<meta name="theme-color" content="#34495e">
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+
+
+  <link href="{% static "css/dash.css" %}" rel="stylesheet" />
+  <style>
+    .hero .container {
+      width: 95%;
+    }
+  </style>
+</head>
+
+<body class="theme-page">
+  <section class="hero is-primary">
+    <!-- Hero header: will stick at the top -->
+    <div class="hero-head">
+      <nav class="main-nav navbar ">
+  <div class="container">
+    <div class="navbar-start">
+      <a class="navbar-item" href="https://jenil.github.io/bulmaswatch/">
+        <img src="/bulmaswatch/assets/icons/apple-touch-icon-144x144.png" alt="" class="logo">
+        <h1 class="title is-5">Innathe Parupadi</h1>
+      </a>
+      
+      
+  
+    </div>
+    <span class="navbar-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+  </div>
+</nav>
+
+    </div>
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Welcome
+        </h1>
+        <h2 class="subtitle">
+          {{name}}
+        </h2>
+        
+      </div>
+    </div>
+    
+  </section>
+  <div class="columns">
+     
+      <div class="column" align = center>
+        <section class="section" id="typography">
+  <nav class="level is-mobile">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Articles</p>
+            <p class="title">{{artno}}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Published</p>
+            <p class="title">{{pub}}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">UnPublished</p>
+            <p class="title">{{unpub}}</p>
+          </div>
+        </div>
+
+      </nav>
+      <hr>
+
+</section>
+
+<section class="section" id="card">
+
+        <div class="container">
+            <div class="columns is-multiline">
+               
+                                <!-- Loop From Here -->{% for i in data %}
+            <div class="column is-quater"> 
+                    <div class="card" style="width : 400px ; height : auto">
+                      <div class="card-image">
+                        <figure class="image is-2by2"> <img src="{{i.url}}" style=" max-height : 350px"  alt="Image"> </figure>
+                      </div>
+                      <div class="card-content">
+                        <div class="media">
+        
+                          <div class="media-content">
+                            <p class="title is-4">{{i.title}}</p>
+                            <p class="subtitle is-6">{{i.author}}</p>
+                          </div>
+                        </div>
+                        <div class="content">         <a href="{{i.editlink}}" class="button is-primary is-outlined"> Edit </a>
+                            {% if i.published == 1 %}
+                            <a class="button is-info is-outlined is-disabled"> Published </a>
+                            {% else %}
+                            <a class="button is-danger is-outlined is-disabled"> Unpublished </a>
+                            {% endif %}
+                        </div>
+                      </div></div>
+            
+                    </div>
+                    {% endfor %}<!-- Loop To Here -->
+
+
+
+                </div>
+
+        </div>
+      </section>
+      <a class="button is-success is-outlined  " style="margin-bottom : 50px"> Add New Article </a>
+
+    
+
+  
+
+  <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      
+      <p>
+        <strong>Innathe Paripadi</strong> by
+        <a href="#" target="_blank">Merclain Technology</a>.
+        <br> Made With Bulma 
+        
+       </p>
+         
+    </div>
+  </div>
+</footer>
+
+<script crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" src="https://code.jquery.com/jquery-3.1.1.min.js">
+</script>
+<script type="text/javascript">
+$(function() {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+});
+</script>
+
+</body>
+
+</html>
